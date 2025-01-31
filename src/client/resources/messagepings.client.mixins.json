@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.fazuh.messagepings.mixin.client",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "com.fazuh.messagepings.client.core.MixinChatHud"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

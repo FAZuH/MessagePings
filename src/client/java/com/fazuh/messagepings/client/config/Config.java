@@ -22,7 +22,9 @@ public final class Config {
             .registerTypeAdapter(Pattern.class, new PatternAdapter())
             .registerTypeAdapter(URI.class, new URIAdapter())
             .create();
+
     private List<MessagePingEntry> messagePatterns = new ArrayList<>();
+    private boolean pingsEnabled = true;
 
     public void load() {
         Path configPath = FabricLoader.getInstance().getConfigDir().resolve(CONFIG_FILE);
@@ -52,6 +54,14 @@ public final class Config {
         } catch (IOException e) {
             MessagepingsClient.LOGGER.warning("Failed to save config: " + e.getMessage());
         }
+    }
+
+    public boolean isEnabled() {
+        return pingsEnabled;
+    }
+    
+    public void togglePings() {
+        pingsEnabled = !pingsEnabled;
     }
 
     public List<MessagePingEntry> getMessagePatterns() {

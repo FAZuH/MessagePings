@@ -18,9 +18,11 @@ public final class Core {
         patternCommand = new PatternCommand(this);
     }
 
-    public void start() { }
+    public void start() {
+    }
 
-    public void stop() { }
+    public void stop() {
+    }
 
     public DiscordWebhook getWebhook() {
         return webhook;
@@ -30,7 +32,9 @@ public final class Core {
         return messageHandler;
     }
 
-    public PatternCommand getPatternCommand() { return patternCommand; }
+    public PatternCommand getPatternCommand() {
+        return patternCommand;
+    }
 
     public Config getConfig() {
         return config;

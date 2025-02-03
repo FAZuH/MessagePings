@@ -1,19 +1,17 @@
 package com.fazuh.messagepings.client.core;
 
-import com.fazuh.messagepings.client.MessagepingsClient;
 import com.fazuh.messagepings.client.config.Config;
 import com.fazuh.messagepings.client.config.MessagePingEntry;
-import com.fazuh.messagepings.client.config.PingFormatBuilder;
+import com.fazuh.messagepings.client.config.PingMessageBuilder;
 import com.fazuh.messagepings.client.webhook.WebhookPayload;
-import net.fabricmc.fabric.api.client.message.v1.ClientReceiveMessageEvents;
 
 import java.io.IOException;
 import java.util.List;
 
-public class MessageHandler {
+public class MessageEventHandler {
     private final Core core;
 
-    public MessageHandler(Core core) {
+    public MessageEventHandler(Core core) {
         this.core = core;
     }
 
@@ -24,7 +22,7 @@ public class MessageHandler {
 
         List<MessagePingEntry> entries = getConfig().getEntriesFromString(message);
         for (MessagePingEntry entry : entries) {
-            String formattedMessage = new PingFormatBuilder(entry.getPingFormat()).setMessage(message).setTimestamp(timestamp).build();
+            String formattedMessage = new PingMessageBuilder(entry.getPingFormat()).setMessage(message).setTimestamp(timestamp).build();
             WebhookPayload payload = new WebhookPayload(entry.getUri(), formattedMessage);
 
             try {

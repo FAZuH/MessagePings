@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.time.Instant;
 
 @Mixin(ChatHud.class)
-public class MixinChatHud {
+public class MixinOnChatMessage {
     @Unique
     private static String lastMessage;
 
@@ -22,6 +22,7 @@ public class MixinChatHud {
         MessagepingsClient messagePings = MessagepingsClient.getInstance();
         String messageContent = message.content().getString();
 
+        // HACK: Prevent duplicate messages.
         if (messageContent.equals(lastMessage)) {
             return;
         }
@@ -30,7 +31,7 @@ public class MixinChatHud {
         if (messagePings != null) {
             new Thread(() -> {
                 long timestamp = Instant.now().getEpochSecond();
-                messagePings.getCore().getMessageHandler().onMessage(messageContent, timestamp);
+                messagePings.getCore().getMessageEventHandler().onMessage(messageContent, timestamp);
             }).start();
         }
     }

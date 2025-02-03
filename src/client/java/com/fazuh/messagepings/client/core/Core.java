@@ -7,14 +7,14 @@ import com.fazuh.messagepings.client.webhook.DiscordWebhook;
 public final class Core {
     private final Config config;
     private final DiscordWebhook webhook;
-    private final MessageHandler messageHandler;
+    private final MessageEventHandler messageEventHandler;
     private final PatternCommand patternCommand;
 
     public Core() {
         config = new Config();
         config.load();
         webhook = new DiscordWebhook();
-        messageHandler = new MessageHandler(this);
+        messageEventHandler = new MessageEventHandler(this);
         patternCommand = new PatternCommand(this);
     }
 
@@ -28,8 +28,8 @@ public final class Core {
         return webhook;
     }
 
-    public MessageHandler getMessageHandler() {
-        return messageHandler;
+    public MessageEventHandler getMessageEventHandler() {
+        return messageEventHandler;
     }
 
     public PatternCommand getPatternCommand() {
